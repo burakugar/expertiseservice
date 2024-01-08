@@ -15,8 +15,4 @@ public final class ErrorDto {
         this.message = message;
         this.details = details;
     }
-    public ErrorDto(int status, String message) {
-        this(status, message, null);
-    }
-
 }

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public final class BaseControllerAdvice {
@@ -26,7 +25,7 @@ public final class BaseControllerAdvice {
         BindingResult result = ex.getBindingResult();
         List<String> errorMessages = result.getAllErrors().stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                .collect(Collectors.toList());
+                .toList();
 
         ErrorDto error = new ErrorDto(HttpStatus.BAD_REQUEST.value(), "Validation failed", errorMessages);
         return ResponseEntity.badRequest().body(error);
@@ -36,7 +35,7 @@ public final class BaseControllerAdvice {
     public ResponseEntity<ErrorDto> handleValidationException(ConstraintViolationException ex) {
         List<String> errorMessages = ex.getConstraintViolations().stream()
                 .map(ConstraintViolation::getMessage)
-                .collect(Collectors.toList());
+                .toList();
 
         ErrorDto error = new ErrorDto(HttpStatus.BAD_REQUEST.value(), "Validation failed", errorMessages);
         return ResponseEntity.badRequest().body(error);

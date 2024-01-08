@@ -34,7 +34,7 @@ public final class DataInitializer implements CommandLineRunner {
             carRepository.save(new Car(2L));
         }
 
-        // Initialize Expertise Sessions (Dummy Data)
+        // Initialize Expertise Sessions
         if (sessionRepository.count() == 0) {
             Car car1 = carRepository.findById(1L).orElse(null);
             Car car2 = carRepository.findById(2L).orElse(null);

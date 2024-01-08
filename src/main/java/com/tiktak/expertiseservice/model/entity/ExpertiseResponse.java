@@ -2,13 +2,13 @@ package com.tiktak.expertiseservice.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @Entity(name = "expertise_response")
 public class ExpertiseResponse {
     @Id
@@ -24,7 +24,7 @@ public class ExpertiseResponse {
     private Question question;
 
     @Column(name = "answer", nullable = false)
-    @Size(max = 5)
+    @Size(max = 3)
     private String answer;
 
     @Column(name = "photo_url", nullable = false)

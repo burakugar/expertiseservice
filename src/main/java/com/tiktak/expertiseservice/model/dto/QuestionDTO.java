@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Builder
 @Setter
-public class QuestionDTO {
+public final class QuestionDTO {
     @NotNull(message = "Question ID is required")
     private Long questionId;
 
@@ -19,5 +19,6 @@ public class QuestionDTO {
     private String content;
 
     @URL(message = "Invalid URL format")
+    @NotBlank(message = "Photo url is required")
     private String photoUrl;
 }

@@ -1,10 +1,9 @@
 package com.tiktak.expertiseservice.controller;
 
-import com.tiktak.expertiseservice.exception.CarNotFoundException;
-import com.tiktak.expertiseservice.exception.InvalidExpertiseResponseException;
 import com.tiktak.expertiseservice.model.dto.ExpertiseResponseDTO;
 import com.tiktak.expertiseservice.model.dto.QuestionDTO;
-import com.tiktak.expertiseservice.service.ExpertiseService;
+import com.tiktak.expertiseservice.service.impl.ExpertiseServiceImpl;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,19 +16,17 @@ import java.util.List;
 @AllArgsConstructor
 public class ExpertiseController {
 
-    private ExpertiseService expertiseService;
+    private ExpertiseServiceImpl expertiseService;
 
     @GetMapping("/questions/{carId}")
     public ResponseEntity<List<QuestionDTO>> getQuestions(@PathVariable Long carId) {
-        List<QuestionDTO> questions = expertiseService.getQuestionsForCar(carId);
-        return ResponseEntity.ok(questions);
+        return ResponseEntity.ok(expertiseService.getQuestionsForCar(carId));
     }
 
-    // Endpoint to save expertise response
     @PostMapping("/response")
-    public ResponseEntity<String> saveExpertiseResponse(@RequestBody ExpertiseResponseDTO responseDTO) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void saveExpertiseResponse(@Valid @RequestBody ExpertiseResponseDTO responseDTO) {
         expertiseService.saveExpertiseResponse(responseDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Response saved successfully");
     }
 
 }

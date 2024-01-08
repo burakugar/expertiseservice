@@ -1,16 +1,16 @@
 package com.tiktak.expertiseservice.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.hibernate.validator.constraints.URL;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Getter
 @AllArgsConstructor
-public class AnswerDTO {
+public final class AnswerDTO {
     @NotNull(message = "Question ID is required")
     private Long questionId;
 

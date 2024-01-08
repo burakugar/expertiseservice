@@ -1,21 +1,23 @@
 package com.tiktak.expertiseservice.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class ExpertiseResponseDTO {
-    @NotNull(message = "Session ID is required")
+    @NotNull(message = "Session ID must not be null")
     private Long sessionId;
-    @NotNull(message = "Car ID is required")
-    private Long carId;
-    @NotEmpty(message = "Answers are required")
-    private List<AnswerDTO> answers;
+    @NotNull(message = "Car ID must not be null")
+    Long carId;
+    @NotEmpty(message = "Answers list cannot be empty")
+    private List<@Valid AnswerDTO> answers;
 }
+    

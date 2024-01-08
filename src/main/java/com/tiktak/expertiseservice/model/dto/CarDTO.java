@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CarDTO {
+public final class CarDTO {
     @NotNull(message = "Car ID is required")
     private Long carId;
 }
